@@ -16,8 +16,6 @@ class _BmiHomePageState extends State<BmiHomePage> {
 
   var bgColors = Colors.grey.shade200;
 
-
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -142,62 +140,53 @@ class _BmiHomePageState extends State<BmiHomePage> {
                         var heightInFeet = footController.text.toString();
                         var heightInInch = inchController.text.toString();
 
-                        if(weightInKG!= "" && heightInFeet!="" && heightInInch!=""){
+                        if (weightInKG != "" &&
+                            heightInFeet != "" &&
+                            heightInInch != "") {
                           // BMI Calculation.
 
                           var inWeightInKG = int.parse(weightInKG);
                           var inHeightInFeet = int.parse(heightInFeet);
                           var inHeightInInch = int.parse(heightInInch);
 
+                          var heightInInchs =
+                              (inHeightInFeet * 12) + inHeightInInch;
 
-                          var heightInInchs = (inHeightInFeet *12) + inHeightInInch;
-
-                          var heightInCm = heightInInchs *2.54;
+                          var heightInCm = heightInInchs * 2.54;
 
                           var heightInMeter = heightInCm / 100;
 
-                          var bmi = inWeightInKG / (heightInMeter *heightInMeter);
+                          var bmi =
+                              inWeightInKG / (heightInMeter * heightInMeter);
 
                           var message;
 
-                          if(bmi > 25){
+                          if (bmi > 25) {
                             message = "You are OverWeight!! ";
                             bgColors = Colors.orange;
-                          }
-                          else if(bmi < 18){
+                          } else if (bmi < 18) {
                             message = "You are UnderWeight!!";
                             bgColors = Colors.red;
-                          }
-                          else{
+                          } else {
                             message = "You are Healthy!!";
                             bgColors = Colors.green;
                           }
 
                           setState(() {
-                            result = "$message \n Your BMI is : ${bmi.toStringAsFixed(3)}";
+                            result =
+                                "$message \n Your BMI is : ${bmi.toStringAsFixed(3)}";
                           });
-
-
 
                           print(result);
 
                           weightController.clear();
                           footController.clear();
                           inchController.clear();
-
-
-
-
-
-
-
-                        }else{
+                        } else {
                           setState(() {
                             result = "Please fill all the required Fields";
                           });
-
                         }
-
                       },
                       child: Text(
                         ' Click  to Calculate',
@@ -208,17 +197,22 @@ class _BmiHomePageState extends State<BmiHomePage> {
                         ),
                       )),
                 ),
-                SizedBox(height: 16,),
-
-                Text(result,textAlign: TextAlign.center,  style:TextStyle(
-                  color: Colors.black,fontSize: 16,fontWeight: FontWeight.bold
-                ),),
+                SizedBox(
+                  height: 16,
+                ),
+                Text(
+                  result,
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold),
+                ),
               ],
             ),
           ),
         ),
       ),
     );
-
   }
 }
